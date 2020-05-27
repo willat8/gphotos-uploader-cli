@@ -9,8 +9,6 @@ import (
 	"time"
 
 	"github.com/pierrec/xxHash/xxHash32"
-
-	"github.com/gphotosuploader/gphotos-uploader-cli/utils/filesystem"
 )
 
 var (
@@ -35,17 +33,6 @@ func NewCompletedUploadedFileItem(filePath string) (CompletedUploadedFileItem, e
 		path: filePath,
 	}
 
-	fileHash, err := Hash(filePath)
-	if err != nil {
-		return item, err
-	}
-
-	mTime, err := filesystem.GetMTime(filePath)
-	if err != nil {
-		return item, ErrCannotGetMTime
-	}
-
-	item.SetValue(fileHash, mTime)
 	return item, nil
 }
 
