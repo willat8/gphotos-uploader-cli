@@ -56,6 +56,7 @@ You can compile the source code in your system. **Go 1.12+** is required to comp
 ```
 $ git clone https://github.com/gphotosuploader/gphotos-uploader-cli
 $ cd gphotos-uploader-cli
+$ NIXPKGS_ALLOW_INSECURE=1 nix-shell -p go_1_14 gnumake -I nixpkgs=https://github.com/NixOS/nixpkgs-channels/archive/7e9b0dff974c89e070da1ad85713ff3c20b0ca97.tar.gz
 $ make build
 ```
 
