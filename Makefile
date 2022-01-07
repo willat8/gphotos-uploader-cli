@@ -7,7 +7,7 @@ VERSION ?= $(shell git describe --tags --always --dirty)
 # Use linker flags to provide version/build settings to the target
 VERSION_IMPORT_PATH := github.com/gphotosuploader/gphotos-uploader-cli/cmd
 RELEASE_VERSION_FLAGS=-X=${VERSION_IMPORT_PATH}.version=$(VERSION)
-LDFLAGS=-ldflags "$(RELEASE_VERSION_FLAGS)"
+LDFLAGS=-ldflags "$(RELEASE_VERSION_FLAGS) -s -w -linkmode external -extldflags -static"
 
 # go source files, ignore vendor directory
 PKGS = $(shell go list ./... | grep -v /vendor)
