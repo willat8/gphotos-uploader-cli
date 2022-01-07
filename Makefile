@@ -3,7 +3,7 @@ CONFIGURATION_PACKAGE := github.com/gphotosuploader/gphotos-uploader-cli/version
 
 # This VERSION could be set calling `make VERSION=0.2.0`
 VERSION ?= $(shell git describe --tags --always --dirty)
-LDFLAGS=-ldflags "-X ${CONFIGURATION_PACKAGE}.versionString=$(VERSION)"
+LDFLAGS=-ldflags "-X ${CONFIGURATION_PACKAGE}.versionString=$(VERSION) -s -w -linkmode external -extldflags -static"
 
 TEST_VERSION="0.0.0-test.preview"
 TEST_LDFLAGS=-ldflags "-X ${CONFIGURATION_PACKAGE}.versionString=$(TEST_VERSION)"
