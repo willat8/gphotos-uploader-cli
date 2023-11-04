@@ -1,7 +1,7 @@
 package filetracker
 
 import (
-	"os"
+	"time"
 
 	"github.com/gphotosuploader/gphotos-uploader-cli/internal/log"
 )
@@ -43,17 +43,12 @@ func New(r FileRepository) *FileTracker {
 
 // MarkAsUploaded marks a file as already uploaded.
 func (ft FileTracker) MarkAsUploaded(file string) error {
-	fileInfo, err := os.Stat(file)
-	if err != nil {
-		return err
-	}
-
 	hash, err := ft.Hasher.Hash(file)
 	if err != nil {
 		return err
 	}
 	item := TrackedFile{
-		ModTime: fileInfo.ModTime(),
+		ModTime: time.Time{},
 		Hash:    hash,
 	}
 
@@ -67,38 +62,12 @@ func (ft FileTracker) MarkAsUploaded(file string) error {
 // In case that last modification time has changed (or it doesn't exist - retro compatibility),
 // it compares a hash of the content of the file against the one in the repository.
 func (ft FileTracker) IsUploaded(file string) bool {
-	item, found := ft.repo.Get(file)
+	_, found := ft.repo.Get(file)
 	if !found {
 		return false
 	}
 
-	fileInfo, err := os.Stat(file)
-	if err != nil {
-		ft.Logger.Debugf("Error retrieving file info for '%s' (%s).", file, err)
-		return false
-	}
-
-	if item.ModTime.Equal(fileInfo.ModTime()) {
-		return true
-	}
-
-	hash, err := ft.Hasher.Hash(file)
-	if err != nil {
-		return false
-	}
-
-	// checks if the file is the same (equal value)
-	if item.Hash == hash {
-		// updates file marker with mtime to speed up comparison on the next run
-		item.ModTime = fileInfo.ModTime()
-		if err = ft.repo.Put(file, item); err != nil {
-			ft.Logger.Debugf("Error updating marker for '%s' with modification time (%s).", file, err)
-		}
-
-		return true
-	}
-
-	return false
+	return true
 }
 
 // UnmarkAsUploaded un-marks a file as already uploaded.
