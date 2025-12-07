@@ -3,8 +3,8 @@ package list
 import (
 	"context"
 	"fmt"
-	gphotos "github.com/gphotosuploader/google-photos-api-client-go/v3"
-	"github.com/gphotosuploader/google-photos-api-client-go/v3/albums"
+	gphotos "github.com/willat8/google-photos-api-client-go/v3"
+	"github.com/willat8/google-photos-api-client-go/v3/albums"
 	"github.com/gphotosuploader/gphotos-uploader-cli/internal/app"
 	"github.com/gphotosuploader/gphotos-uploader-cli/internal/cli/flags"
 	"github.com/gphotosuploader/gphotos-uploader-cli/internal/feedback"

@@ -8,7 +8,7 @@ require (
 	github.com/99designs/keyring v1.2.2
 	github.com/bmatcuk/doublestar/v2 v2.0.4
 	github.com/facebookgo/symwalk v0.0.0-20150726040526-42004b9f3222
-	github.com/gphotosuploader/google-photos-api-client-go/v3 v3.0.9
+	github.com/willat8/google-photos-api-client-go/v3 v3.0.14
 	github.com/hjson/hjson-go/v4 v4.5.0
 	github.com/int128/oauth2cli v1.17.0
 	github.com/k0kubun/go-ansi v0.0.0-20180517002512-3bf9e2903213
